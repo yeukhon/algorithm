@@ -23,6 +23,17 @@
 #    is limited such that you cannot load all elements into the memory at once?
 
 
+# The hash/dict approach performance:
+#   n = length of nums1
+#   m = length of nums2
+#   adding to dictionary:   O(n) or O(m)
+#   check recurrence:       O(n) or O(m)
+#   total time complexity:  O(n+m)
+#   storage complexity: O(g+k)
+#       where g = size of intersect list
+#       where k = size of common pool dictionary
+#       In the worst case, when both input lists are equal, g and k is 2*length
+
 class Solution(object):
     def intersect(self, nums1, nums2):
         """
@@ -31,14 +42,20 @@ class Solution(object):
         :rtype: List[int]
         """
 
-        nums1_length = len(nums1)
-        nums2_length = len(nums2)
+        intersect_list = []
+        common_pool = {}
 
-        if nums1_length >= nums2_length:
-            longer_list = nums1
-            shorter_list = nums2
-        else:
-            longer_list = nums2
-            shorter_list = nums1
+        for n in nums1:
+            if n in common_pool:
+                common_pool[n] += 1
+            else:
+                common_pool[n] = 1
 
-        return [s for s in shorter_list if s in longer_list]
+        for n in nums2:
+            if n in common_pool and common_pool[n] > 0:
+                common_pool[n] -= 1
+                intersect_list.append(n)
+                if common_pool[n] == 0:
+                    del common_pool[n]
+
+        return intersect_list

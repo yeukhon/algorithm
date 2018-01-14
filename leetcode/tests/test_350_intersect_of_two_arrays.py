@@ -3,9 +3,9 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import unittest
-from leetcode.s350_intersect_of_two_array import Solution
+from leetcode.s350_intersect_of_two_arrays import Solution
 
-class Test_350_Intersect_of_Two_Array(unittest.TestCase):
+class Test_350_Intersect_of_Two_Arrays(unittest.TestCase):
 
     def _intersect(self, a1, a2):
         solution = Solution()
