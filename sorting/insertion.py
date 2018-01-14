@@ -24,9 +24,7 @@ def swap(ulist, index1, index2):
 
     """
     
-    t = ulist[index1]
-    ulist[index1] = ulist[index2]
-    ulist[index2] = t
+    ulist[index1], ulist[index2] = ulist[index2], ulist[index1]
     return ulist
 
 def insertion_sort(ulist):
