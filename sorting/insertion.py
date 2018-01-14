@@ -2,6 +2,11 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+import sys
+
+if sys.version_info[0] < 3:
+    range = xrange
+
 def swap(ulist, index1, index2):
     """
     Swap two elements in a list and return the modified list.
@@ -49,12 +54,12 @@ def insertion_sort(ulist):
     
     # assuming first element is sorted and always compare
     # with the previous element from current index
-    for index in xrange(1, len(ulist)):
+    for index in range(1, len(ulist)):
         if ulist[index] < ulist[index-1]:
             # compare with every ancestor from current index
             # if ancestor (given by prev_index) is bigger
             # than current index (given by prev_index+1), swap
-            for prev_index in reversed(xrange(0, index)):
+            for prev_index in reversed(range(0, index)):
                 if ulist[prev_index+1] < ulist[prev_index]:
                     ulist = swap(ulist, prev_index, prev_index+1)
                 else:
