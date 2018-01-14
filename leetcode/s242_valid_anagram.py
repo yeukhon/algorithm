@@ -19,9 +19,8 @@
 # This classic, built-in sorting solution in Python is fine
 # given the t and s are usually very small. Performance wise:
 # sorted(string) -> O(n log n)
-# filter(iterator) -> O(n)
 # ss == ts -> O(n) / O(1) if length is different
-# total running complexity is probably: O(2n + n.lg.n)
+# total running complexity is probably: O(n + n.lg.n)
 
 class Solution(object):
     def isAnagram(self, s, t):
