@@ -4,65 +4,46 @@
 
 import sys
 
+# Insertion sort
+#   best case:      omega(n)    - only one comparison needed
+#   worst case:     theta(n^2)
+#   Big O:          O(n^2)
+
 if sys.version_info[0] < 3:
     range = xrange
 
-def swap(ulist, index1, index2):
+def insertion_sort(arr):
     """
-    Swap two elements in a list and return the modified list.
-    
-    Parameters
-    -----------
-    ulist : list
-    index1: int
-    index2 : int
+    Return a sorted list in ascending order.
 
-    Returns
-    -------
-    ulist : list
-        The modified version of list after swap takes place.
+    Insertion sort works by assuming the first element in the
+    array is "already sorted". We start with index i=1,
+    and for each i, we compare backward (j=i-1, j=i-2 ..., j >= 0),
+    and sawp array[j] and array[i] if array[i] > array[j].
 
-    """
-    
-    ulist[index1], ulist[index2] = ulist[index2], ulist[index1]
-    return ulist
+    After the swap, we maintain this invariant:
+        - on each pass, all elements before i are sorted.
 
-def insertion_sort(ulist):
-    """
-    Return a sorted list at an increasing order.
-    
-    Assuming the first element in the list is sorted, and let such
-    element in the list as the last_sorted. Do a pair-wise swap
-    between the current element and its ancestors when the current
-    element is smaller than its ancestor. Repeat the swap until
-    the current element is larger than or equal to an ancestor
-    element.
-
-    Parameters
-    ----------
-    ulist : list
-        An unsorted homogenous list.
-
-    Returns
-    -------
-    slist : list
-        A sorted list in an increasing order.
+    >>> insertion_sort([])
+    []
+    >>> insertion_sort([1])
+    [1]
+    >>> insertion_sort([2, 1])
+    [1, 2]
+    >>> insertion_sort([3, 5, 1, 6])
+    [1, 3, 5, 6]
 
     """
-    
-    # assuming first element is sorted and always compare
-    # with the previous element from current index
-    for index in range(1, len(ulist)):
-        if ulist[index] < ulist[index-1]:
-            # compare with every ancestor from current index
-            # if ancestor (given by prev_index) is bigger
-            # than current index (given by prev_index+1), swap
-            for prev_index in reversed(range(0, index)):
-                if ulist[prev_index+1] < ulist[prev_index]:
-                    ulist = swap(ulist, prev_index, prev_index+1)
-                else:
-                    break
-    return ulist
+
+    for i in range(1, len(arr)):
+        # we use "reversed", which returns an iterator, to walk
+        # backward of array.
+        for j in reversed(range(i)):
+
+            # if backward number is smaller, we swap
+            if arr[j] > arr[j+1]:
+                arr[j+1], arr[j] = arr[j], arr[j+1]
+    return arr
 
 def binary_insertion_sort(ulist):
     """
