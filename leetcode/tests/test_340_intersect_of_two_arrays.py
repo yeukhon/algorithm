@@ -3,9 +3,9 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import unittest
-from leetcode.s350_intersect_of_two_arrays import Solution
+from leetcode.s349_intersect_of_two_arrays import Solution
 
-class Test_350_Intersect_of_Two_Arrays(unittest.TestCase):
+class Test_349_Intersect_of_Two_Arrays(unittest.TestCase):
 
     def _intersect(self, a1, a2):
         solution = Solution()
@@ -20,13 +20,14 @@ class Test_350_Intersect_of_Two_Arrays(unittest.TestCase):
         self.assertEqual(
             self._intersect([1,0], [4,5]), [])
 
-    def test_12221_22_returns_22(self):
+    def test_12221_2_returns_2(self):
         self.assertEqual(
-            self._intersect([1,2,2,1], [2,2]), [2, 2])
+            self._intersect([1,2,2,1], [2]), [2])
 
-    def test_12_11_returns_1(self):
+    def test_1343_143_returns_1(self):
         self.assertEqual(
-            self._intersect([1,2], [1,1]), [1])
+            sorted(self._intersect([1,3,4,3], [1,4,3])),
+                sorted([1,3,4]))
 
 if __name__ == "__main__":
     unittest.main()
