@@ -13,7 +13,7 @@ from algorithm.sorting.selection_sort import (
 #   L1 and L2, and recursively divide until each sub-array reaches
 #   size 0 or size 1.
 #   At each level, selection sort is called on L1 and L2, yields
-#   produces SL1 and SL2, concatenate SL1 and SL2, then return
+#   SL1 and SL2, concatenate SL1 and SL2, then return
 #   the resulting sorted array.
 #
 #   Performance:

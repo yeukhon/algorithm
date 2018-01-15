@@ -56,8 +56,6 @@ def selection_sort_2(arr, start=None, end=None):
     if end is None:
         end = len(arr) - 1
 
-    # compare last element with itself is a waste, so we can
-    # i up to length of array - 1
     for i in range(start, end):
         for j in range(i, end+1):
             if arr[i] > arr[j]:
