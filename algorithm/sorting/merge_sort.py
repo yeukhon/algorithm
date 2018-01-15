@@ -59,7 +59,7 @@ def merge_sort(arr):
 
 def ip_merge_sort(arr):
     """
-    In-place version fo merge sort on an array.
+    In-place version of merge sort on an array.
 
     >>> ip_merge_sort([])
     []
