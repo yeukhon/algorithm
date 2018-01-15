@@ -1,6 +1,7 @@
 import unittest
 
-from heap import MinBinaryHeap
+from algorithm.heap.heap import MinBinaryHeap
+
 class TestMinBinaryHeap(unittest.TestCase):
     def setUp(self):
         self.keys = [2,3,4]
