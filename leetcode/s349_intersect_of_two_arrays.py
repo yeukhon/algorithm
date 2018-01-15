@@ -12,10 +12,16 @@
 #  - Each element in the result must be unique.
 #  - The result can be in any order.
 #
-# Performance: O(n*m) where n = len(shorter_list), m = len(longer_list)
+# Performance:
+# shorter_list = O(n)
+# longer_list = O(m)
+# pool check = O(k)
+# calls pool.keys() = O(k)
+# n <= k <= m
+# O(n * m + k)
 
 class Solution(object):
-    def intersect(self, nums1, nums2):
+    def intersection(self, nums1, nums2):
         """
         :type nums1: List[int]
         :type nums2: List[int]
@@ -29,4 +35,9 @@ class Solution(object):
             shorter_list = nums2
             longer_list = nums1
 
-        return [x for x in shorter_list if x in longer_list]
+        pool = {}
+        for x in shorter_list:
+            if x in longer_list and x not in pool:
+                pool[x] = None
+        # for Python 3, we can use [*pool] for better performance
+        return list(pool.keys())
