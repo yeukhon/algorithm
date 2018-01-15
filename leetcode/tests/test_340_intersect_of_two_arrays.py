@@ -9,7 +9,7 @@ class Test_349_Intersect_of_Two_Arrays(unittest.TestCase):
 
     def _intersect(self, a1, a2):
         solution = Solution()
-        result = solution.intersect(a1, a2)
+        result = solution.intersection(a1, a2)
         return result
 
     def test_12_13_returns_1(self):
