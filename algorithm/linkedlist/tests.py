@@ -1,5 +1,5 @@
 import unittest
-from algorithm.linkedlist.linkedlist import SListNode, SLinkedList
+from algorithm.linkedlist.slinkedlist import SListNode, SLinkedList
 
 class TestSLinkedListClass(unittest.TestCase):
 
