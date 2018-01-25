@@ -55,3 +55,6 @@ class Solution(object):
             return True
         else:
             return False
+
+# The simpler solution according to the submissions is
+# count(L) == count(R) AND count(U) == count(D)
