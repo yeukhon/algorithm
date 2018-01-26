@@ -3,6 +3,7 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 # 283. Move Zeroes
+# https://leetcode.com/problems/move-zeroes/
 # Given an array nums, write a function to move all 0's to the end of
 # it while maintaining the relative order of the non-zero elements.
 #
@@ -45,3 +46,18 @@ class Solution(object):
                 self.swap(nums, i, j)
                 i += 1
             j += 1
+
+# better solution according to https://www.youtube.com/watch?v=xfxMOgurlAM
+# complexity: O(n) regardless of how many zeroes or non-zeroes.
+# the alternative solution proposed is 2 * non-zeroes
+def moveZeroes(nums):
+    if nums:
+        start = 0
+        for i in range(len(nums)):
+            if nums[i] != 0:
+                nums[start] = nums[i]
+                start += 1
+        while (start < len(nums)):
+            nums[start] = 0
+            start += 1
+
