@@ -1,6 +1,7 @@
+import random
 import unittest
 
-from algorithm.heap.heap import MinBinaryHeap
+from algorithm.heap.heap import MinBinaryHeap, MaxBinaryHeap
 
 class TestMinBinaryHeap(unittest.TestCase):
     def setUp(self):
@@ -37,6 +38,46 @@ class TestMinBinaryHeap(unittest.TestCase):
         self.pop()
         self.assertEqual(self.heap._keys, [None, 2, 3, 4])
         self.assertEqual(self.heap._values, [None, "b", "d", "c"])
+
+class TestMaxBinaryHeap(unittest.TestCase):
+    def build_heap_from_array(self, array):
+        heap = MaxBinaryHeap()
+        for d in array:
+            heap.insert(d)
+        return heap
+
+    def assert_maxheap_pop(self, heap, old_array):
+        output = []
+        while heap.get_size():
+            output.append(heap.pop())
+
+        self.assertEqual(output, 
+            sorted(old_array, reverse=True))
+
+    def test_pop(self):
+        unsorted_data = [1, 3, 4, 5, 6, 6, 8, 2, 7]
+        heap = self.build_heap_from_array(unsorted_data)
+
+        self.assert_maxheap_pop(heap, unsorted_data)
+
+    def test_size_after_insert(self):
+        heap = MaxBinaryHeap()
+        heap.insert(1)
+        self.assertEqual(heap.get_size(), 1)
+
+    def test_size_after_pop(self):
+        heap = MaxBinaryHeap()
+        heap.insert(1)
+        heap.insert(2)
+        self.assertEqual(heap.get_size(), 2)
+
+        heap.pop()
+        self.assertEqual(heap.get_size(), 1)
+
+    def test_random_insert_pop(self):
+        random_data = [random.randrange(1, 100) for _ in range(50)]
+        heap = self.build_heap_from_array(random_data)
+        self.assert_maxheap_pop(heap, random_data)
 
 if __name__ == "__main__":
     unittest.main()

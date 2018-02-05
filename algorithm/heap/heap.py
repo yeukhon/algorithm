@@ -131,3 +131,78 @@ class MinBinaryHeap(BinaryHeapADT):
             self._values[x_index], self._values[xp_index] = \
                 self._values[xp_index], self._values[x_index]
             x_index, xp_index = xp_index, self.parent_of(xp_index)
+
+
+class MaxBinaryHeap(object):
+    def __init__(self):
+        self._data = [None]
+
+    def get_size(self):
+        """We always reserve the first."""
+        return len(self._data) - 1
+
+    def parent_of(self, i):
+        return int(math.floor(i/2))
+
+    def children_of(self, i):
+        return 2*i, 2*i + 1
+
+    def parent_is_smaller(self, x):
+        parent_index = self.parent_of(x)
+        return self._data[x] > self._data[parent_index]
+
+    def swap(self, x_index, p_index):
+        """Swap parent and child."""
+        self._data[x_index], self._data[p_index] = (
+            self._data[p_index], self._data[x_index])
+
+    def insert(self, x):
+        """Insert new data (x) into the end of the array,
+        and let x bubbles upward until max heap order
+        property is satisfied.
+
+        """
+
+        # remember we index 0 is always reserved, this is
+        # important later on as we do insertion.
+        self._data.append(x)
+        x_index = self.get_size()
+        xp_index = self.parent_of(x_index)
+
+        while x_index > 1 and self.parent_is_smaller(x_index):
+            self.swap(x_index, xp_index)
+            x_index = xp_index
+            xp_index = self.parent_of(x_index)
+
+    def max_heapify(self, i):
+        l_index, r_index = self.children_of(i)
+        larger_index = i
+
+        if (l_index <= self.get_size() and
+            self._data[l_index] > self._data[i]):
+            larger_index = l_index
+
+        if (r_index <= self.get_size() and
+            self._data[r_index] > self._data[larger_index]):
+            larger_index = r_index
+
+        if larger_index != i:
+            self.swap(i, larger_index)
+            self.max_heapify(larger_index)
+
+    def pop(self):
+        # heap is empty when the underlying list is left with
+        # the first element in the list.
+        if self.get_size() < 1:
+            return None
+
+        # swap max element which is at the root (index=1)
+        # with the leaf node before popping.
+        self.swap(1, self.get_size())
+
+        # pop the max element and heapify from root
+        # calling .pop() on a Python list will resize end of the list by 1
+        val = self._data.pop()
+        self.max_heapify(1)
+
+        return val
