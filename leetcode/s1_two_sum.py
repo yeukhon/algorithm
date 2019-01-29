@@ -30,8 +30,8 @@ class Solution(object):
         num_table = {}
         # one-pass hash table solution
         for i, num in enumerate(nums):
-            diff = target-num
-            if diff in num_table:
-                return [num_table[diff], i]
+            if num in table:
+                return [table[num], i]
             else:
-                num_table[num] = i
+                diff = target - num
+                table[diff] = i
