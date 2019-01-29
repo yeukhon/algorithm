@@ -44,3 +44,46 @@ class Solution(object):
             l3.next = ListNode(s)
             l3 = l3.next
         return start
+
+    def get_sum(self, a, b, prev_carry):
+        total = a + b + prev_carry
+        if total >= 10:
+            new_carry, c_val = 1, total - 10
+        else:
+            new_carry, c_val = 0, total
+        return new_carry, ListNode(c_val)
+
+    # 68ms 
+    def addTwoNumbers(self, l1, l2):
+        """
+        :type l1: ListNode
+        :type l2: ListNode
+        :rtype: ListNode
+        """
+        a = l1
+        b = l2
+        carry, c = self.get_sum(a.val, b.val, 0)
+        a = a.next
+        b = b.next
+        c_head = c
+        while True:
+            if a and b:
+                carry, c.next = self.get_sum(a.val, b.val, carry)
+                c = c.next
+                a = a.next
+                b = b.next
+            elif a:
+                while a:
+                    carry, c.next = self.get_sum(a.val, 0, carry)
+                    a = a.next
+                    c = c.next
+            elif b:
+                while b:
+                    carry, c.next = self.get_sum(b.val, 0, carry)
+                    b = b.next
+                    c = c.next
+            else:
+                break
+        if carry == 1:
+            c.next = ListNode(1)
+        return c_head
