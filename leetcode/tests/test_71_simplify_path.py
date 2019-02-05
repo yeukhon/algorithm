@@ -54,5 +54,17 @@ class Test71SimplifyPath(unittest.TestCase):
         ans = self.simplify('/a/b///c/d//././/..')
         self.assertEqual(ans, '/a/b/c')
 
+    def test_case_13(self):
+        ans = self.simplify('~/git', home='/home/yeukhon')
+        self.assertEqual(ans, '/home/yeukhon/git')
+
+    def test_case_14(self):
+        ans = self.simplify('~/', home='/home/yeukhon')
+        self.assertEqual(ans, '/home/yeukhon')
+
+    def test_case_15(self):
+        ans = self.simplify('/tmp/~/.ansible', home='/home/yeukhon')
+        self.assertEqual(ans, '/tmp/home/yeukhon/.ansible')
+
 if __name__ == '__main__':
     unittest.main()
